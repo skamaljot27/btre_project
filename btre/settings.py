@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 import dj_database_url
 
 
@@ -87,10 +88,14 @@ WSGI_APPLICATION = 'btre.wsgi.application'
         'HOST':'localhost',
     }
 }'''
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES={
+    'default': dj_database_url.config()
+}
+    
 
 
-# Password validation
+
+# Password validation`
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -135,3 +140,5 @@ STATICFILES_DIRS=[
 #media folder settings
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
+
+django_heroku.settings(locals())
